@@ -30,11 +30,11 @@ app.get('/greetings/:name', function (req, res) {
 app.get('/', function (req, res) {
     var queryString = req.query.term;
 
-    //have to check for when the term is undefined
+    //have to check for when the term is undefined**
     if (req.query.term == undefined) {
-        queryString = 'puppies';
+        req.query.term = 'puppies';
     }
-  giphy.search(queryString, function (err, response) {
+  giphy.search(req.query.term, function (err, response) {
     res.render('home', {gifs: response.data});
   });
 });
